@@ -5,6 +5,10 @@ import org.springframework.stereotype.Service;
 import pl.practise.pokemonapp.pokemonList.Pokemon;
 import pl.practise.pokemonapp.pokemonList.PokemonRepository;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PokemonDetailsService {
     private final PokemonDetailsNetworkRepository pokemonDetailsNetworkRepository;
@@ -20,13 +24,19 @@ public class PokemonDetailsService {
         this.pokemonDetailsTransformer = pokemonDetailsTransformer;
     }
 
+    public List<PokemonDetails> getListOfPokemonDetails(String pokemonNames) {
+        String[] names = pokemonNames.split(",");
+        return Arrays.stream(names).map(name -> {
+            return getPokemonDetails(name);
+        }).collect(Collectors.toList());
+    }
+
 
     public PokemonDetails getPokemonDetails(String pokemonName) {
         Pokemon pokemon = pokemonRepository.findByName(pokemonName)
                 .orElseThrow(() -> new NoPokemonFoundException(pokemonName));
         PokemonDetailsResponse pokemonDetailsResponse = pokemonDetailsNetworkRepository.fetchPokemonDetails(pokemon.getId());
-        PokemonDetails pokemonDetails = pokemonDetailsTransformer.toEntity(pokemonDetailsResponse);
-        return pokemonDetails;
+        return pokemonDetailsTransformer.toEntity(pokemonDetailsResponse);
     }
 
 }
