@@ -8,6 +8,7 @@ import pl.practise.pokemonapp.pokemonDetails.NoPokemonFoundException;
 import pl.practise.pokemonapp.pokemonDetails.PokemonDetails;
 import pl.practise.pokemonapp.pokemonDetails.PokemonDetailsService;
 import pl.practise.pokemonapp.pokemonList.Pokemon;
+import pl.practise.pokemonapp.pokemonList.PokemonListItem;
 import pl.practise.pokemonapp.pokemonList.PokemonListService;
 
 import java.util.List;
@@ -27,8 +28,8 @@ class PokemonController {
     }
 
     @GetMapping("/list")
-    List<Pokemon> getPokemonList() {
-        return pokemonListService.getPokemonList();
+    List<PokemonListItem> getPokemonItemList() {
+        return pokemonListService.getPokemonListItems();
     }
 
     @GetMapping
