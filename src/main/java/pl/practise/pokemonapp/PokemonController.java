@@ -8,11 +8,13 @@ import pl.practise.pokemonapp.pokemonDetails.NoPokemonFoundException;
 import pl.practise.pokemonapp.pokemonDetails.PokemonDetails;
 import pl.practise.pokemonapp.pokemonDetails.PokemonDetailsService;
 import pl.practise.pokemonapp.pokemonList.Pokemon;
+import pl.practise.pokemonapp.pokemonList.PokemonListEnvelop;
 import pl.practise.pokemonapp.pokemonList.PokemonListItem;
 import pl.practise.pokemonapp.pokemonList.PokemonListService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/pokemon")
 class PokemonController {
@@ -28,8 +30,8 @@ class PokemonController {
     }
 
     @GetMapping("/list")
-    List<PokemonListItem> getPokemonItemList(@RequestParam(defaultValue = "0") int offset,
-                                             @RequestParam(defaultValue = "20") int limit) {
+    PokemonListEnvelop getPokemonItemList(@RequestParam(defaultValue = "0") int offset,
+                                          @RequestParam(defaultValue = "20") int limit) {
         return pokemonListService.getPokemonListItems(offset, limit);
     }
 
