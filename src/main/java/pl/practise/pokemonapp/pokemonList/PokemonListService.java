@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class PokemonListService {
-    private static final String ENDPOINT_URL = "https://pokemonacademyapiv2pbr.herokuapp.com/pokemon/list?limit=%d&offset=%d";
+    private static final String ENDPOINT_URL = "https://pokemonapi1.herokuapp.com/pokemon/list?limit=%d&offset=%d";
 
     private final PokemonDetailsService pokemonDetailsService;
     private final PokemonRepository pokemonRepository;
